@@ -370,14 +370,14 @@ def decode(data):
 
 def decode_bytes(data: bytes):
     """Helper function for the general decode to decode bytes"""
+    data_decoded = None
     try:
         # First try unpacking as msgpack binary data
         data_decoded = msgpack.unpackb(data, raw=False)
     except msgpack.FormatError:
         # If not valid msgpack data, try unpacking as a binary string
         data_decoded = data.decode()
-    finally:
-        return data_decoded
+    return data_decoded
 
 
 def decode_dict(data: Dict):
