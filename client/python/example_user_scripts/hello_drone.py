@@ -40,20 +40,20 @@ async def main():
             lambda _, chase: image_display.receive(chase, chase_cam_window),
         )
 
-        # Subscribe to the downward-facing camera sensor's RGB and Depth images
-        rgb_name = "RGB-Image"
-        image_display.add_image(rgb_name, subwin_idx=0)
-        client.subscribe(
-            drone.sensors["DownCamera"]["scene_camera"],
-            lambda _, rgb: image_display.receive(rgb, rgb_name),
-        )
+        # # Subscribe to the downward-facing camera sensor's RGB and Depth images
+        # rgb_name = "RGB-Image"
+        # image_display.add_image(rgb_name, subwin_idx=0)
+        # client.subscribe(
+        #     drone.sensors["DownCamera"]["scene_camera"],
+        #     lambda _, rgb: image_display.receive(rgb, rgb_name),
+        # )
 
-        depth_name = "Depth-Image"
-        image_display.add_image(depth_name, subwin_idx=2)
-        client.subscribe(
-            drone.sensors["DownCamera"]["depth_camera"],
-            lambda _, depth: image_display.receive(depth, depth_name),
-        )
+        # depth_name = "Depth-Image"
+        # image_display.add_image(depth_name, subwin_idx=2)
+        # client.subscribe(
+        #     drone.sensors["DownCamera"]["depth_camera"],
+        #     lambda _, depth: image_display.receive(depth, depth_name),
+        # )
 
         image_display.start()
 

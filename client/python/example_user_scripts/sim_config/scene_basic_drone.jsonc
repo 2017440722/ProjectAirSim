@@ -3,12 +3,13 @@
   "actors": [
     {
       "type": "robot",
-      "name": "Drone1",
+      "name": "TargetDrone",
       "origin": {
-        "xyz": "-1.0 8.0 -4.0",
-        "rpy-deg": "0 0 -45"
+        "xyz": "0 0 -1.0",
+        "rpy-deg": "0 0 0"
       },
-      "robot-config": "robot_quadrotor_fastphysics.jsonc"
+      // "robot-config": "robot_quadrotor_fastphysics.jsonc"
+      "robot-config": "robot_quadrotor_fastphysics_UserDefine.jsonc"
     }
   ],
   "clock": {
