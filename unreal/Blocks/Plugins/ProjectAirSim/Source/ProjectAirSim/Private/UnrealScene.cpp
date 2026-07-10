@@ -6,6 +6,7 @@
 #include "UnrealScene.h"
 
 #include "CineCameraActor.h"
+#include "Sensors/UnrealCamera.h"
 #include "Components/SkinnedMeshComponent.h"
 #include "Components/StaticMeshComponent.h"
 #include "DrawDebugHelpers.h"
