@@ -184,7 +184,7 @@ if (MSVC)
     # Pass /EHsc explicitly to avoid C4530 when assimp treats warnings as errors.
     set(ASSIMP_EXTRA_CXX_FLAGS "/EHsc")
 elseif (CMAKE_CXX_COMPILER_ID MATCHES "Clang|GNU")
-    set(ASSIMP_EXTRA_CXX_FLAGS "-Wno-error=nontrivial-memcall")
+    set(ASSIMP_EXTRA_CXX_FLAGS "-Wno-error=nontrivial-memaccess")
 endif()
 
 # Set up dependency: assimp
