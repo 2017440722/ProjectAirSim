@@ -116,22 +116,24 @@ if defined MSVC_VER (
   for /d %%I in ("!VS_INSTALL_DIR!\VC\Tools\MSVC\%MSVC_VER%*") do (
     if not defined MSVC_TOOLS_VERSION set "MSVC_TOOLS_VERSION=%%~nxI"
   )
-) else (
+)
+
+if not defined MSVC_TOOLS_VERSION (
+  REM Fall back to the latest installed MSVC toolset if the requested version wasn't found
   for /f "delims=" %%I in ('dir /b /ad /o-n "!VS_INSTALL_DIR!\VC\Tools\MSVC" 2^>NUL') do (
     if not defined MSVC_TOOLS_VERSION set "MSVC_TOOLS_VERSION=%%I"
+  )
+  if defined MSVC_VER (
+    echo [WARNING] Requested MSVC toolset !MSVC_VER! not found. Falling back to latest installed: !MSVC_TOOLS_VERSION!
   )
 )
 
 if not defined MSVC_TOOLS_VERSION (
   echo:
-  if defined MSVC_VER (
-    echo [ERROR] MSVC toolset %MSVC_VER% was not found under:
-  ) else (
-    echo [ERROR] No MSVC toolset was found under:
-  )
+  echo [ERROR] No MSVC toolset was found under:
   echo !VS_INSTALL_DIR!\VC\Tools\MSVC
   if "%UE_DETECTED%"=="1" (
-    echo Install the requested MSVC toolset or update build.cmd for your Unreal Engine version.
+    echo Install the Visual Studio C++ build tools or update build.cmd for your Unreal Engine version.
   ) else (
     echo Install the Visual Studio C++ build tools.
   )
