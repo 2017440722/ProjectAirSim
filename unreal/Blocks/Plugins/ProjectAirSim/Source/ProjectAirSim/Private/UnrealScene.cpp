@@ -17,6 +17,7 @@
 #include "ProjectAirSim.h"
 #include "Robot/UnrealEnvActor.h"
 #include "Robot/UnrealRobot.h"
+#include "Sensors/UnrealCamera.h"
 #include "UObject/ConstructorHelpers.h"
 #include "UnrealHelpers.h"
 #include "UnrealLogger.h"
