@@ -106,6 +106,10 @@ void AUnrealScene::LoadUnrealActor(
 
       // Save ptr to unreal_robot
       unreal_actors.Add(unreal_robot);
+
+      // Broadcast the OnRobotCreated event so Blueprints can react
+      FString RobotID = UTF8_TO_TCHAR(Actor.GetID().c_str());
+      OnRobotCreated.Broadcast(RobotID);
     }
   }
 }
@@ -342,49 +346,18 @@ void AUnrealScene::BeginPlay() {
     GEngine->bUseFixedFrameRate = false;  // set to default from GameEngine.cpp
   }
 
-  // Set up keyboard input bindings (use Tab key to switch chase cam target)
+  // Set up keyboard input bindings (use T key to enable/disable path tracing)
   APlayerController* P1Controller = unreal_world->GetFirstPlayerController();
   EnableInput(P1Controller);
 
-  if (sim_scene && !sim_scene->GetVRMode()) {
-    FInputActionKeyMapping SwitchViewAction("SwitchStreamingView", EKeys::Tab);
-    P1Controller->PlayerInput->AddActionMapping(SwitchViewAction);
-    InputComponent->BindAction("SwitchStreamingView", IE_Pressed, this,
-                               &AUnrealScene::SwitchStreamingView);
-  }
-
-  // Set up keyboard input bindings (use T key to enable/disable path tracing)
   FInputActionKeyMapping ToggleTraceAction("ToggleTrace", EKeys::T);
   P1Controller->PlayerInput->AddActionMapping(ToggleTraceAction);
   InputComponent->BindAction("ToggleTrace", IE_Pressed, this,
                              &AUnrealScene::ToggleTrace);
 
-  if (sim_scene && !sim_scene->GetVRMode()) {
-    // Set game view target to one of the robots
-    idx_actor_to_view = 0;
-    AUnrealRobot* UnrealRobotToView = nullptr;
-    if (unreal_actors.Num() > 0) {
-      // Find the first robot with a valid streaming camera. If no robots have
-      // any valid streaming cameras, leave the view target index as the first
-      // robot since the view will fall back to the origin of the actor to still
-      // be able to display something.
-      for (int i = 0; i < unreal_actors.Num(); ++i) {
-        UnrealRobotToView = unreal_actors[i];
-        if (UnrealRobotToView != nullptr &&
-            UnrealRobotToView->GetActiveStreamingCapture() != nullptr) {
-          idx_actor_to_view = i;
-          break;
-        }
-      }
-
-      UnrealRobotToView = unreal_actors[idx_actor_to_view];
-      if (UnrealRobotToView != nullptr) {
-        found_actor = true;
-        UnrealRobotToView->SetViewportResolution();
-        P1Controller->SetViewTarget(UnrealRobotToView);
-      }
-    }
-  }
+  // Do not automatically set view target to the first robot.
+  // The viewport camera is left in its default state; Blueprints can bind
+  // to the OnRobotCreated event dispatcher to react to new robot spawns.
 
   // Initialize WorldSimAPI, Weather, and TimeOfDay
   time_of_day.reset(new TimeOfDay(home_geo_point));
@@ -694,6 +667,7 @@ void AUnrealScene::RegisterServiceMethods() {
   auto get_bbox_handler = get_bbox.CreateMethodHandler(
       &AUnrealScene::Get3DBoundingBoxServiceMethod, *this);
   sim_scene->RegisterServiceMethod(get_bbox, get_bbox_handler);
+
 }
 
 bool AUnrealScene::SwitchStreamingViewServiceMethod() {
