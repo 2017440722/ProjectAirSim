@@ -24,6 +24,10 @@
 // comment so that generated.h is always the last include file with clang-format
 #include "UnrealScene.generated.h"
 
+// Event dispatched when a robot is created in the simulation scene.
+// Blueprints can bind to this event via the OnRobotCreated event dispatcher.
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnRobotCreated, FString, RobotID);
+
 UCLASS()
 class AUnrealScene : public AActor {
   GENERATED_BODY()
@@ -44,6 +48,11 @@ class AUnrealScene : public AActor {
   void ToggleTrace();
 
   void SetTraceLine(const std::vector<float>& color_rgba, float thickness);
+
+  /** Event dispatcher: fires when a robot is created in the scene.
+   *  Blueprints can bind to this to react to new robot spawns. */
+  UPROPERTY(BlueprintAssignable, Category = "Project AirSim")
+  FOnRobotCreated OnRobotCreated;
 
   void StartUnrealScene();
 
