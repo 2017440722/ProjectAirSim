@@ -49,14 +49,15 @@ async def gimbal_keep_level(drone: Drone, camera_name: str, duration: float):
 
 # ── 主函数 ──
 async def main():
-    client = ProjectAirSimClient(address="10.10.2.30")
+    client = ProjectAirSimClient(address="127.0.0.1")
+    # client = ProjectAirSimClient(address="10.10.2.30")
     image_display = ImageDisplay()
 
     try:
         client.connect()
 
         world = World(client, "scene_basic_drone.jsonc", delay_after_load_sec=2)
-        drone = Drone(client, world, "TargetDrone")
+        drone = Drone(client, world, "InterceptorDrone1")
 
         # ── 订阅 Chase 相机（追尾视角） ──
         chase_cam_window = "ChaseCam"

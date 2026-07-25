@@ -3,17 +3,17 @@
   "actors": [
     {
       "type": "robot",
-      "name": "TargetDrone",
+      "name": "InterceptorDrone1",
       "origin": {
         "xyz": "0 0 -0.2",
         "rpy-deg": "0 0 -90"
       },
       // "robot-config": "robot_quadrotor_fastphysics.jsonc"
-      "robot-config": "robot_quadrotor_fastphysics_10in_TargetDrone.jsonc"
+      "robot-config": "robot_quadrotor_fastphysics_7in_InterceptorDrone.jsonc"
     },
     {
       "type": "robot",
-      "name": "TargetDrone1",
+      "name": "InterceptorDrone2",
       "origin": {
         "xyz": "-3 1 -0.2",
         "rpy-deg": "0 0 -90"
@@ -23,13 +23,13 @@
     },
     {
       "type": "robot",
-      "name": "TargetDrone2",
+      "name": "TargetDrone",
       "origin": {
         "xyz": "-6 2 -0.2",
         "rpy-deg": "0 0 -90"
       },
       // "robot-config": "robot_quadrotor_fastphysics.jsonc"
-      "robot-config": "robot_quadrotor_fastphysics_7in_InterceptorDrone.jsonc"
+      "robot-config": "robot_quadrotor_fastphysics_10in_TargetDrone.jsonc"
     }
   ],
   "clock": {

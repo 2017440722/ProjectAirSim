@@ -8,8 +8,8 @@
         "xyz": "0 0 -1.0",
         "rpy-deg": "0 0 0"
       },
-      // "robot-config": "robot_quadrotor_fastphysics.jsonc"
-      "robot-config": "robot_quadrotor_fastphysics_UserDefine.jsonc"
+      "robot-config": "robot_quadrotor_fastphysics.jsonc"
+      // "robot-config": "robot_quadrotor_fastphysics_UserDefine.jsonc"
     }
   ],
   "clock": {

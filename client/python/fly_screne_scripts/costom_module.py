@@ -66,9 +66,9 @@ async def main():
         world = World(client, "scene_basic_drone.jsonc", delay_after_load_sec=0)
 
         # 创建一个 Drone 对象以与加载的模拟世界中的无人机交互
-        drone = Drone(client, world, "TargetDrone")
-        # drone1 = Drone(client, world, "TargetDrone1")
-        # drone2 = Drone(client, world, "TargetDrone2") 
+        drone = Drone(client, world, "InterceptorDrone1")
+        # drone1 = Drone(client, world, "InterceptorDrone2")
+        # drone2 = Drone(client, world, "TargetDrone") 
         # ------------------------------------------------------------------------------
 
         # 订阅追踪相机传感器作为客户端弹出窗口
