@@ -1,0 +1,52 @@
+{
+  "id": "SceneBasicDrone",
+  "actors": [
+    {
+      "type": "robot",
+      "name": "TargetDrone",
+      "origin": {
+        "xyz": "0 0 -0.2",
+        "rpy-deg": "0 0 -90"
+      },
+      // "robot-config": "robot_quadrotor_fastphysics.jsonc"
+      "robot-config": "robot_quadrotor_fastphysics_10in_TargetDrone.jsonc"
+    },
+    {
+      "type": "robot",
+      "name": "TargetDrone1",
+      "origin": {
+        "xyz": "-3 1 -0.2",
+        "rpy-deg": "0 0 -90"
+      },
+      // "robot-config": "robot_quadrotor_fastphysics.jsonc"
+      "robot-config": "robot_quadrotor_fastphysics_7in_InterceptorDrone.jsonc"
+    },
+    {
+      "type": "robot",
+      "name": "TargetDrone2",
+      "origin": {
+        "xyz": "-6 2 -0.2",
+        "rpy-deg": "0 0 -90"
+      },
+      // "robot-config": "robot_quadrotor_fastphysics.jsonc"
+      "robot-config": "robot_quadrotor_fastphysics_7in_InterceptorDrone.jsonc"
+    }
+  ],
+  "clock": {
+    "type": "steppable",
+    "step-ns": 3000000,
+    "real-time-update-rate": 3000000,
+    "pause-on-start": false
+  },
+  "home-geo-point": {
+    "latitude": 47.641468,
+    "longitude": -122.140165,
+    "altitude": 122.0
+  },
+  "segmentation": {
+    "initialize-ids": true,
+    "ignore-existing": false,
+    "use-owner-name": true
+  },
+  "scene-type": "UnrealNative"
+}
